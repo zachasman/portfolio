@@ -1,5 +1,6 @@
 --Used to create a list of best potential contacts for campaign volunteers to phonebank against
 
+CREATE TABLE universes.phones_nv_20191116 AS (
 SELECT DISTINCT
 'dnc_'||xw.person_id person_id,
 CASE WHEN ccj.support_int IS NOT NULL THEN ccj.support_int ELSE 0 END support_id,
@@ -79,3 +80,9 @@ LEFT JOIN (
   OR (nv_caucus_turnout_adjusted_score >= 15
   AND sanders_support_raw_score >= 30) --Turnout >= 10 + Support >= 37 
   ORDER BY 2,4 ASC, 3 DESC)
+  
+  SELECT COUNT(*) FROM universes.phones_nv_20191116 
+  
+  grant usage on schema bernie_zasman to kmachado;
+ grant select on table bernie_zasman.legacybase to kmachado;
+
